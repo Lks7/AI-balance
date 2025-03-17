@@ -1,0 +1,218 @@
+body {
+    background-color: #f8f9fa;
+    color: #212529;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    padding: 20px 0;
+}
+
+#app {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.card {
+    border-radius: 10px;
+    overflow: hidden;
+    border: none;
+}
+
+.card-header {
+    background-color: #fff;
+    border-bottom: none;
+    padding-bottom: 0;
+}
+
+.nav-tabs .nav-link {
+    color: #6c757d;
+    border: none;
+    padding: 10px 20px;
+    font-weight: 500;
+}
+
+.nav-tabs .nav-link.active {
+    color: #0d6efd;
+    border-bottom: 2px solid #0d6efd;
+    background-color: transparent;
+}
+
+.card-body {
+    padding: 25px;
+}
+
+.btn-primary {
+    background-color: #0d6efd;
+    border-color: #0d6efd;
+    padding: 10px 15px;
+    font-weight: 500;
+}
+
+.result-card {
+    background-color: #f8f9fa;
+    border-radius: 8px;
+    padding: 20px;
+}
+
+.result-info {
+    max-height: 300px;
+    overflow-y: auto;
+    background-color: #f1f3f5;
+    border-radius: 6px;
+    padding: 15px;
+}
+
+.result-json {
+    margin: 0;
+    white-space: pre-wrap;
+    font-family: monospace;
+    font-size: 0.9rem;
+    color: #333;
+}
+
+.form-floating label {
+    color: #6c757d;
+}
+
+.form-control:focus {
+    border-color: #86b7fe;
+    box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+}
+/* ... existing code ... */
+
+/* 添加 Bootstrap 图标 */
+@import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css");
+
+/* 美化的结果卡片样式 */
+.result-dashboard {
+    margin-bottom: 15px;
+}
+
+.balance-card {
+    display: flex;
+    align-items: center;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    height: 100%;
+    transition: transform 0.2s;
+}
+
+.balance-card:hover {
+    transform: translateY(-5px);
+}
+
+.balance-icon {
+    font-size: 2rem;
+    margin-right: 15px;
+    color: rgba(0, 0, 0, 0.6);
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 255, 255, 0.5);
+    border-radius: 10px;
+}
+
+.balance-info {
+    flex: 1;
+}
+
+.balance-info h6 {
+    margin: 0;
+    font-size: 0.9rem;
+    color: rgba(0, 0, 0, 0.6);
+    font-weight: 500;
+}
+
+.balance-info h3 {
+    margin: 5px 0 0;
+    font-weight: 600;
+}
+
+.balance-details {
+    margin-top: 10px;
+}
+
+.balance-item {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 5px;
+    font-size: 0.9rem;
+}
+
+.balance-label {
+    color: rgba(0, 0, 0, 0.6);
+}
+
+.balance-value {
+    font-weight: 500;
+}
+
+/* 背景颜色 */
+.bg-light-blue {
+    background-color: rgba(13, 110, 253, 0.1);
+}
+
+.bg-light-green {
+    background-color: rgba(25, 135, 84, 0.1);
+}
+
+.bg-light-purple {
+    background-color: rgba(111, 66, 193, 0.1);
+}
+
+.bg-light-orange {
+    background-color: rgba(253, 126, 20, 0.1);
+}
+
+/* 进度条样式 */
+.usage-progress {
+    background-color: #f8f9fa;
+    border-radius: 10px;
+    padding: 15px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+.progress {
+    background-color: #e9ecef;
+    overflow: hidden;
+    border-radius: 8px;
+}
+
+/* 原始数据切换按钮 */
+.raw-data {
+    background-color: #f8f9fa;
+    border-radius: 8px;
+    padding: 15px;
+}
+/* ... existing code ... */
+
+/* 代理设置区域样式 */
+.proxy-section {
+    background-color: #f8f9fa;
+    border-radius: 8px;
+    padding: 15px;
+    margin-bottom: 20px;
+    border-left: 3px solid #0d6efd;
+}
+
+.form-check-input:checked {
+    background-color: #0d6efd;
+    border-color: #0d6efd;
+}
+
+.form-check-label {
+    font-weight: 500;
+}
+
+/* 当代理启用时添加视觉提示 */
+.card.proxy-enabled {
+    border-top: 3px solid #0d6efd;
+}
+
+/* 提示信息样式 */
+.proxy-info {
+    font-size: 0.8rem;
+    color: #6c757d;
+    margin-top: 5px;
+}
