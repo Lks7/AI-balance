@@ -1,0 +1,131 @@
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.card {
+    border: none;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.nav-tabs .nav-link {
+    border: none;
+    color: #6c757d;
+    padding: 10px 20px;
+}
+
+.nav-tabs .nav-link.active {
+    color: #0d6efd;
+    border-bottom: 2px solid #0d6efd;
+}
+
+.form-floating > .form-control {
+    height: calc(3.5rem + 2px);
+}
+
+.proxy-info {
+    color: #6c757d;
+    font-size: 0.875rem;
+}
+
+.proxy-info i {
+    margin-right: 5px;
+}
+
+.result-card {
+    padding: 20px;
+}
+
+.balance-card {
+    padding: 20px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.balance-icon {
+    font-size: 2rem;
+    margin-right: 15px;
+    color: #0d6efd;
+}
+
+.balance-info h6 {
+    margin: 0;
+    color: #6c757d;
+    font-size: 0.9rem;
+}
+
+.balance-info h3 {
+    margin: 5px 0 0;
+    font-size: 1.5rem;
+}
+
+.bg-light-blue {
+    background-color: rgba(13, 110, 253, 0.1);
+}
+
+.bg-light-green {
+    background-color: rgba(25, 135, 84, 0.1);
+}
+
+.bg-light-purple {
+    background-color: rgba(111, 66, 193, 0.1);
+}
+
+.usage-progress {
+    padding: 15px;
+    background-color: #f8f9fa;
+    border-radius: 10px;
+}
+
+.progress {
+    height: 10px;
+    border-radius: 5px;
+}
+
+.result-json {
+    background-color: #f8f9fa;
+    padding: 15px;
+    border-radius: 5px;
+    font-size: 0.875rem;
+    max-height: 300px;
+    overflow-y: auto;
+}
+
+/* Silicon Flow specific styles */
+.validation-results {
+    background-color: #fff;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.validation-results table {
+    margin-bottom: 0;
+}
+
+.validation-results th {
+    background-color: #f8f9fa;
+    border-top: none;
+}
+
+.validation-results .table-success {
+    background-color: rgba(25, 135, 84, 0.1);
+}
+
+.validation-results .table-danger {
+    background-color: rgba(220, 53, 69, 0.1);
+}
+
+.validation-results td {
+    vertical-align: middle;
+}
+
+textarea#multiKeys {
+    font-family: monospace;
+    font-size: 0.875rem;
+    line-height: 1.5;
+    resize: vertical;
+} 

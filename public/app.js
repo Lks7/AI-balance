@@ -70,6 +70,20 @@ const app = Vue.createApp({
                         'Authorization': ''
                     },
                     extraParams: []
+                },
+                {
+                    id: 'siliconflow',
+                    name: '硅基流动',
+                    apiKey: '',
+                    endpointUrl: 'https://api.siliconflow.com/v1/chat/completions',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': ''
+                    },
+                    extraParams: [],
+                    isMultiKeyMode: true,
+                    multiKeys: '',
+                    validationResults: []
                 }
             ]
         }
@@ -94,6 +108,74 @@ const app = Vue.createApp({
 
         async queryBalance() {
             const currentModel = this.models[this.currentModelIndex];
+
+            // Special handling for Silicon Flow multi-key validation
+            if (currentModel.id === 'siliconflow' && currentModel.isMultiKeyMode) {
+                if (!currentModel.multiKeys.trim()) {
+                    this.error = '请输入至少一个API Key';
+                    return;
+                }
+
+                this.isLoading = true;
+                this.error = null;
+                this.result = null;
+                currentModel.validationResults = [];
+
+                const keys = currentModel.multiKeys.split('\n').filter(key => key.trim());
+                const validationPromises = keys.map(async (key) => {
+                    try {
+                        const headers = {
+                            'Content-Type': 'application/json',
+                            'Authorization': `Bearer ${key.trim()}`
+                        };
+
+                        const requestData = {
+                            model: "deepseek-r1",
+                            messages: [{ role: "user", content: "Hi" }],
+                            max_tokens: 1
+                        };
+
+                        let targetUrl = currentModel.endpointUrl;
+                        if (this.useProxy && this.proxyUrl.trim()) {
+                            const originalUrlParts = new URL(targetUrl);
+                            const pathAndQuery = originalUrlParts.pathname + originalUrlParts.search;
+                            let baseUrl = this.proxyUrl;
+                            if (baseUrl.endsWith('/')) {
+                                baseUrl = baseUrl.slice(0, -1);
+                            }
+                            targetUrl = baseUrl + pathAndQuery;
+                        }
+
+                        const response = await axios.post(targetUrl, requestData, { headers });
+                        return {
+                            key: key.trim(),
+                            isValid: true,
+                            message: '有效'
+                        };
+                    } catch (error) {
+                        return {
+                            key: key.trim(),
+                            isValid: false,
+                            message: error.response?.data?.error?.message || error.message
+                        };
+                    }
+                });
+
+                try {
+                    currentModel.validationResults = await Promise.all(validationPromises);
+                    this.result = {
+                        total_keys: keys.length,
+                        valid_keys: currentModel.validationResults.filter(r => r.isValid).length,
+                        results: currentModel.validationResults
+                    };
+                    this.formatModelResult();
+                } catch (error) {
+                    this.error = '验证过程发生错误';
+                } finally {
+                    this.isLoading = false;
+                }
+                return;
+            }
 
             if (!currentModel.apiKey.trim()) {
                 this.error = 'API Key 不能为空';
@@ -201,6 +283,15 @@ const app = Vue.createApp({
         },
         formatModelResult() {
             const currentModel = this.models[this.currentModelIndex];
+
+            if (currentModel.id === 'siliconflow') {
+                this.formattedResult = {
+                    total_keys: this.result.total_keys,
+                    valid_keys: this.result.valid_keys,
+                    validation_results: this.result.results
+                };
+                return;
+            }
 
             if (currentModel.id === 'openai') {
                 this.formattedResult = {

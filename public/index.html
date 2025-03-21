@@ -45,10 +45,16 @@
           </div>
         </div>
         <div class="input-section mb-4">
-          <div class="form-floating mb-3">
+          <div class="form-floating mb-3" v-if="!models[currentModelIndex].isMultiKeyMode">
             <input type="text" class="form-control" id="apiKey" v-model="models[currentModelIndex].apiKey"
               placeholder="请输入API Key">
             <label for="apiKey">API Key</label>
+          </div>
+
+          <div v-if="models[currentModelIndex].isMultiKeyMode" class="mb-3">
+            <label for="multiKeys" class="form-label">API Keys (每行一个)</label>
+            <textarea class="form-control" id="multiKeys" v-model="models[currentModelIndex].multiKeys"
+              rows="5" placeholder="请输入API Keys，每行一个"></textarea>
           </div>
 
           <div v-if="models[currentModelIndex].extraParams.length > 0">
@@ -155,9 +161,59 @@
                   </div>
                 </template>
 
+                <!-- Silicon Flow 结果 -->
+                <template v-if="models[currentModelIndex].id === 'siliconflow'">
+                  <div class="col-md-6">
+                    <div class="balance-card bg-light-blue">
+                      <div class="balance-icon"><i class="bi bi-key"></i></div>
+                      <div class="balance-info">
+                        <h6>总Key数量</h6>
+                        <h3>{{ formattedResult.total_keys || '0' }}</h3>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="balance-card bg-light-green">
+                      <div class="balance-icon"><i class="bi bi-check-circle"></i></div>
+                      <div class="balance-info">
+                        <h6>有效Key数量</h6>
+                        <h3>{{ formattedResult.valid_keys || '0' }}</h3>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-12 mt-4">
+                    <div class="validation-results">
+                      <h6 class="mb-3">验证结果详情</h6>
+                      <div class="table-responsive">
+                        <table class="table table-hover">
+                          <thead>
+                            <tr>
+                              <th>API Key</th>
+                              <th>状态</th>
+                              <th>详情</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr v-for="(result, index) in formattedResult.validation_results" :key="index"
+                              :class="{'table-success': result.isValid, 'table-danger': !result.isValid}">
+                              <td>{{ result.key }}</td>
+                              <td>
+                                <span :class="{'text-success': result.isValid, 'text-danger': !result.isValid}">
+                                  {{ result.isValid ? '有效' : '无效' }}
+                                </span>
+                              </td>
+                              <td>{{ result.message }}</td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+                  </div>
+                </template>
+
                 <!-- 其他模型的格式化展示 - 可以继续添加其他模型的模板 -->
                 <template
-                  v-if="models[currentModelIndex].id !== 'openai' && models[currentModelIndex].id !== 'deepseek'">
+                  v-if="models[currentModelIndex].id !== 'openai' && models[currentModelIndex].id !== 'deepseek' && models[currentModelIndex].id !== 'siliconflow'">
                   <div class="col-12">
                     <div class="balance-card bg-light-blue">
                       <div class="balance-icon"><i class="bi bi-box"></i></div>
